@@ -26,7 +26,7 @@ class loger:
         self.driver.save_screenshot(f"scr_shot/new_{self.test_name}.png")
 
     def add_log(self, log_string, event):
-        full_log_string = f'{datetime.now().strftime("%Y_%m_%d-%I_%M_%S")} - {self.test_name}::>{log_string}'
+        full_log_string = f'{datetime.now().strftime("%Y_%m_%d-%I:%M:%S")} - {self.test_name}::>{log_string}'
         self.log_test = {
             "test_name": self.test_name,
             "event": event,
