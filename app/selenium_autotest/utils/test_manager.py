@@ -1,3 +1,4 @@
+from selenium_stealth import stealth
 from selenium import webdriver
 from app.selenium_autotest.utils.test_form import test_form
 
@@ -17,6 +18,13 @@ class test_manager:
     def __init__(self, platform, time_delay=1):
         self.time_delay = time_delay
         if platform == "Chrome":
+            language = 'en'
+            self.driver = webdriver.Chrome(executable_path="chromedriver")
+            stealth(self.driver,
+                    languages=[language, "en"],
+                    vendor="Google Inc.",
+                    platform="Win32",
+                    )
             self.driver = webdriver.Chrome(executable_path="chromedriver")
         elif platform == "Firefox":
             self.driver = webdriver.Firefox(executable_path="geckodriver")
