@@ -23,7 +23,7 @@ class loger:
                 f.write(b)
 
     def make_screenshot(self):
-        self.driver.save_screenshot(f"scr_shot/new_{self.test_name}.png")
+        self.driver.save_screenshot(f"./scr_shot/new_{self.test_name}.png")
 
     def add_log(self, log_string, event):
         full_log_string = f'{datetime.now().strftime("%Y_%m_%d-%I:%M:%S")} - {self.test_name}::>{log_string}'
@@ -36,6 +36,7 @@ class loger:
             "canonic_scr_shot": "",
             "dif_scr_shot": 0,
         }
+        print(self.log_test)
 
     def print_log(self):
         with open("log_test.txt") as f:

@@ -61,5 +61,4 @@ class test_form:
                     self.log.add_log("Ticket dont submitted", "failed")
                     return 0
             else:
-                self.log.add_log("Problem with reCAPTCHA", "failed")
                 return 0

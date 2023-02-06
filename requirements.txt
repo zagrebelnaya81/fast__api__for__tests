@@ -24,3 +24,5 @@ certifi==2022.12.7
 pydub==0.25.1
 websockets==10.4
 selenium-stealth==1.0.6
+alembic==1.9.2
+uvicorn==0.20.0

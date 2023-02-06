@@ -1,10 +1,20 @@
 #docker-compose.yml
 version: "3.0"
 services:
+#  firefox:
+#    image: selenium/standalone-firefox
+#    ports:
+#      - "4444:4444"
+
+  chrome:
+    image: selenium/standalone-chrome
+    ports:
+      - "4444:4444"
   app:
     build: .
     volumes:
       - .:/app
+      - ./scr_shot:/app/scr_shot:rw
     ports:
       - "48000:8000"
     restart: always

@@ -1,6 +1,8 @@
-from selenium_stealth import stealth
-from selenium import webdriver
+from selenium.webdriver import DesiredCapabilities
+
 from app.selenium_autotest.utils.test_form import test_form
+
+from selenium import webdriver
 
 data_set = {
     "input": {
@@ -18,16 +20,37 @@ class test_manager:
     def __init__(self, platform, time_delay=1):
         self.time_delay = time_delay
         if platform == "Chrome":
-            language = 'en'
-            self.driver = webdriver.Chrome(executable_path="chromedriver")
-            stealth(self.driver,
-                    languages=[language, "en"],
-                    vendor="Google Inc.",
-                    platform="Win32",
-                    )
-            self.driver = webdriver.Chrome(executable_path="chromedriver")
+            # language = "en"
+            options = webdriver.ChromeOptions()
+            options.add_argument("no-sandbox")
+            options.add_argument("--disable-gpu")
+            options.add_argument("--window-size=800,600")
+            options.add_argument("--disable-dev-shm-usage")
+            host = "chrome"
+            self.driver = webdriver.Remote(
+                command_executor=f"http://{host}:4444/wd/hub",
+                desired_capabilities=DesiredCapabilities.CHROME,
+                options=options,
+            )
+            # stealth(self.driver,
+            #         languages=[language, "en"],
+            #         vendor="Google Inc.",
+            #         platform="Win32",
+            #         )
+            # self.driver = webdriver.Chrome(executable_path="chromedriver")
         elif platform == "Firefox":
+            # fp = webdriver.FirefoxProfile()
+            # fp.set_preference("privacy.trackingprotection.enabled", False)
+            #
+            # fp.update_preferences()
+            #
+            # self.driver = webdriver.Remote(
+            #     command_executor='http://firefox:4444/wd/hub',
+            #     desired_capabilities={'browserName': 'firefox', 'javascriptEnabled': True},
+            #     browser_profile=fp
+            # )
             self.driver = webdriver.Firefox(executable_path="geckodriver")
+
         self.test_contactus = test_form(
             self.driver, "https://www.store.od.atncorp.com/contactus", data_set, "test_contactus", "contact-form-submit"
         )
